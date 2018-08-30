@@ -32,7 +32,7 @@ function login(String $user): Bool
  * @param  Bool    $permenant Whether or not it should be a permenant redirect
  * @return Void
  */
-function redirect(String $url = '/', Bool $permenant = false): Void
+function redirect(String $url = '/', Bool $permanent = false): Void
 {
   header(sprintf('Location: %s', $url), true, $permanent ? 301 : 302);
   exit();
