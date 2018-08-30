@@ -17,10 +17,10 @@ try {
       ) and login($_GET['user'])) {
         redirect(SUCCESS_PAGE);
       } else {
-        throw new \Error('Invalid login attempt');
+        throw new Error('Invalid login attempt');
       }
   } else {
-    throw new \Error('Missing required paramaters');
+    throw new Error('Missing required paramaters');
   }
 } catch (Throwable $e) {
   redirect(ERROR_PAGE);
