@@ -48,7 +48,7 @@ function redirect(String $url = '/', Bool $permanent = false): Void
 function array_keys_exist(Array $array, String ...$keys): Bool
 {
   $exist = true;
-  foreach($key as $key) {
+  foreach($keys as $key) {
     if (! array_key_exists($key, $array)) {
       $exist = false;
       break;
