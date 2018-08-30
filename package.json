@@ -1,0 +1,20 @@
+{
+  "name": "wp-login-username",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "start": "php -S localhost:8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shgysk8zer0/wp-login-username.git"
+  },
+  "author": "Chris Zuber <shgysk8zer0@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shgysk8zer0/wp-login-username/issues"
+  },
+  "homepage": "https://github.com/shgysk8zer0/wp-login-username#readme"
+}
