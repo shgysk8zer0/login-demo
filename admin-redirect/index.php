@@ -13,8 +13,8 @@ if (array_keys_exist($_GET, 'user', 'datetime', 'hmac')) {
   ) and login($_GET['user'])) {
     redirect(DESTINATION);
   } else {
-    http_response_code(404);
+    http_response_code(400);
   }
 } else {
-  http_response_code(404);
+  http_response_code(400);
 }
