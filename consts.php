@@ -6,3 +6,5 @@ const LIFETIME     = '+5 seconds';
 const USER         = 'mySpiffyUsername';
 const SUCCESS_PAGE = '/success/';
 const ERROR_PAGE   = '/error/';
+const WP_INIT      = '../wp-load.php';
+define(__NAMESPACE__ . '\\IS_WP', @file_exists(WP_INIT));

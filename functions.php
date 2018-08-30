@@ -1,7 +1,7 @@
 <?php
 namespace Functions;
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'consts.php';
-use const \Constants\{KEY, ALGO, LIFETIME, USER, DESTINATION};
+use const \Constants\{KEY, ALGO, LIFETIME, USER, DESTINATION, IS_WP, WP_INIT};
 use \DateTime;
 
 /**
@@ -17,13 +17,29 @@ function get_user(): String
 
 /**
  * Login user without password
- * @TODO Actually log the user in
  * @param  String $user Username
  * @return Bool         If login was successful
  */
 function login(String $user): Bool
 {
-  return true;
+  if (IS_WP) {
+    try {
+      require_once WP_INIT;
+      $user = get_user_by('login', $user);
+      if (! is_wp_error($user)) {
+        wp_clear_auth_cookie();
+        wp_set_current_user($user->ID);
+        wp_set_auth_cookie($user->ID);
+        return true;
+      } else {
+        return false;
+      }
+    } catch(\Throwable $e) {
+      return false;
+    }
+  } else {
+    return true;
+  }
 }
 
 /**
