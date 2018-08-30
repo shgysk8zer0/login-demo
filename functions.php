@@ -23,7 +23,10 @@ function get_user(): String
   }
 }
 
-
+/**
+ * Load WP if available, returning true/false
+ * @return Bool Whether or not WP script was found & loaded
+ */
 function wp_init(): Bool
 {
   if (IS_WP) {
