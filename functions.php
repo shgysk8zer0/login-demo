@@ -6,13 +6,22 @@ use \DateTime;
 
 /**
  * Gets desired user for cross-site login
- * @TODO Actually get desired user
  * @param Void
  * @return String User
  */
 function get_user(): String
 {
-  return USER;
+  if (IS_WP) {
+    try {
+      require_once WP_INIT;
+      $user = wp_get_current_user();
+      return $user->user_login;
+    } catch(\Throwable $e) {
+      throw new \Error('Unable to get current user');
+    }
+  } else {
+    return USER;
+  }
 }
 
 /**
