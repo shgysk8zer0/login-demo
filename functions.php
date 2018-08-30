@@ -1,8 +1,10 @@
 <?php
 namespace Functions;
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'consts.php';
-use const \Constants\{KEY, ALGO, LIFETIME, USER, DESTINATION, IS_WP, WP_INIT};
+use const \Constants\{KEY, ALGO, LIFETIME, USER, IS_WP, WP_INIT};
 use \DateTime;
+use \Throwable;
+use \Error;
 
 /**
  * Gets desired user for cross-site login
@@ -18,7 +20,7 @@ function get_user(): String
     } else {
       return USER;
     }
-  } catch(\Throwable $e) {
+  } catch(Throwable $e) {
     return USER;
   }
 }
@@ -33,7 +35,7 @@ function wp_init(): Bool
     try {
       require_once WP_INIT;
       return true;
-    } catch (\Throwable $e) {
+    } catch (Throwable $e) {
       return false;
     }
   } else {
@@ -62,7 +64,7 @@ function login(String $user): Bool
     } else {
       return true;
     }
-  } catch (\Throwable $e) {
+  } catch (Throwable $e) {
     return false;
   }
 }
@@ -107,8 +109,8 @@ function array_keys_exist(Array $array, String ...$keys): Bool
  */
 function generate(
   String   $user,
-  String   $key         = KEY,
-  String   $algo        = ALGO
+  String   $key  = KEY,
+  String   $algo = ALGO
 ): String
 {
   $datetime = new DateTime();
@@ -133,8 +135,8 @@ function verify(
   String   $user,
   DateTime $datetime,
   String   $hmac,
-  String   $key = KEY,
-  String   $algo = ALGO
+  String   $key      = KEY,
+  String   $algo     = ALGO
 ): Bool
 {
   $valid = false;
