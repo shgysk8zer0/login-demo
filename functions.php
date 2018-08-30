@@ -11,16 +11,30 @@ use \DateTime;
  */
 function get_user(): String
 {
+  try {
+    if (wp_init()) {
+      $user = wp_get_current_user();
+      return $user->user_login;
+    } else {
+      return USER;
+    }
+  } catch(\Throwable $e) {
+    return USER;
+  }
+}
+
+
+function wp_init(): Bool
+{
   if (IS_WP) {
     try {
       require_once WP_INIT;
-      $user = wp_get_current_user();
-      return $user->user_login;
-    } catch(\Throwable $e) {
-      throw new \Error('Unable to get current user');
+      return true;
+    } catch (\Throwable $e) {
+      return false;
     }
   } else {
-    return USER;
+    return false;
   }
 }
 
@@ -31,9 +45,8 @@ function get_user(): String
  */
 function login(String $user): Bool
 {
-  if (IS_WP) {
-    try {
-      require_once WP_INIT;
+  try {
+    if (wp_init()) {
       $user = get_user_by('login', $user);
       if (! is_wp_error($user)) {
         wp_clear_auth_cookie();
@@ -43,11 +56,11 @@ function login(String $user): Bool
       } else {
         return false;
       }
-    } catch(\Throwable $e) {
-      return false;
+    } else {
+      return true;
     }
-  } else {
-    return true;
+  } catch (\Throwable $e) {
+    return false;
   }
 }
 
